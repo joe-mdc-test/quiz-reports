@@ -1,0 +1,30 @@
+[
+  {
+      'repeat(1000)': {
+        _id: '{{objectId()}}',
+        name: {
+          first: '{{firstName()}}',
+          last: '{{surname()}}'
+        },
+        email(tags) {
+        return `${this.name.first}@${this.name.last}${tags.domainZone()}`.toLowerCase();
+      },
+        quizzes: [
+        {
+          'repeat(1, 10)': {
+            quiz_id: '{{integer(1,10)}}',
+            questions: [
+              {
+                'repeat(10,50)': {
+                  question_id: '{{index()}}',
+                  answer: '{{random("A", "B", "C","D")}}',
+                  isCorrect: '{{bool()}}'
+                }
+              }
+            ],
+          }
+        }
+      ]
+    }
+  }
+]
